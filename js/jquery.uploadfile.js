@@ -335,16 +335,13 @@
 
         }
 
-        function getSizeStr(size) {
-            var sizeStr = "";
-            var sizeKB = size / 1024;
-            if(parseInt(sizeKB) > 1024) {
-                var sizeMB = sizeKB / 1024;
-                sizeStr = sizeMB.toFixed(2) + " MB";
-            } else {
-                sizeStr = sizeKB.toFixed(2) + " KB";
-            }
-            return sizeStr;
+        function getSizeStr(bytes) {
+	   var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+	   if (bytes == 0) {
+	     return '0 Byte';
+	   }
+	   var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+	   return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
         }
 
         function serializeData(extraData) {
